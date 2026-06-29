@@ -1,7 +1,6 @@
 import io
-import logging
-from django.core.mail import EmailMessage
 import json
+import logging
 import stripe
 from datetime import datetime
 
@@ -17,6 +16,8 @@ from reportlab.pdfgen import canvas
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+logger = logging.getLogger(__name__)
+
 
 def build_payment_email_html(
     booking_type,
@@ -29,58 +30,70 @@ def build_payment_email_html(
 ):
     booking_type_map = {
         "tour": "Tour",
-        "flight": "Vé máy bay",
-        "hotel": "Khách sạn",
+        "flight": "Flight Ticket",
+        "hotel": "Hotel",
     }
 
-    booking_label = booking_type_map.get(booking_type, "Đơn hàng")
+    booking_label = booking_type_map.get(booking_type, "Order")
 
     return f"""
     <html>
       <body style="font-family: Arial, sans-serif; color: #222;">
-        <h2>Xác nhận thanh toán thành công</h2>
-        <p>Xin chào <strong>{customer_name or 'Quý khách'}</strong>,</p>
-        <p>Chúng tôi xác nhận bạn đã thanh toán thành công cho <strong>{booking_label}</strong>.</p>
+        <h2>Payment Successful</h2>
+
+        <p>Hello <strong>{customer_name or 'Customer'}</strong>,</p>
+
+        <p>
+          We are pleased to confirm that your payment for 
+          <strong>{booking_label}</strong> has been successfully completed.
+        </p>
 
         <table cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse; margin-top: 12px;">
           <tr>
-            <td><strong>Loại đơn</strong></td>
+            <td><strong>Booking Type</strong></td>
             <td>{booking_label}</td>
           </tr>
           <tr>
-            <td><strong>Tên sản phẩm / dịch vụ</strong></td>
+            <td><strong>Service Name</strong></td>
             <td>{item_name or ''}</td>
           </tr>
           <tr>
-            <td><strong>Khách hàng</strong></td>
+            <td><strong>Customer Name</strong></td>
             <td>{customer_name or ''}</td>
           </tr>
           <tr>
-            <td><strong>Số điện thoại</strong></td>
+            <td><strong>Phone Number</strong></td>
             <td>{customer_phone or ''}</td>
           </tr>
           <tr>
-            <td><strong>Email</strong></td>
+            <td><strong>Email Address</strong></td>
             <td>{customer_email or ''}</td>
           </tr>
           <tr>
-            <td><strong>Mã đơn hàng</strong></td>
+            <td><strong>Order ID</strong></td>
             <td>{order_id or ''}</td>
           </tr>
           <tr>
-            <td><strong>Thời gian thanh toán thành công</strong></td>
+            <td><strong>Payment Time</strong></td>
             <td>{paid_at}</td>
           </tr>
         </table>
 
-        <p style="margin-top: 16px;">Cảm ơn bạn đã sử dụng dịch vụ.</p>
+        <p style="margin-top: 16px;">
+          Your electronic ticket has been attached to this email as a PDF file.
+        </p>
+
+        <p>
+          Please keep this email and bring a valid ID when using the service.
+        </p>
+
+        <p>Thank you for choosing our service.</p>
       </body>
     </html>
     """
 
 
 def build_flight_ticket_pdf(metadata):
-    import io
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import A4
     from reportlab.lib.units import mm
@@ -108,7 +121,7 @@ def build_flight_ticket_pdf(metadata):
         total_rows = 1 + len(rows)
         total_height = row_height * total_rows + (24 if title else 0)
 
-        # outer box
+        # Outer box
         p.setStrokeColor(colors.black)
         p.setLineWidth(1)
         p.rect(x, y - total_height, total_width, total_height, stroke=1, fill=0)
@@ -120,14 +133,14 @@ def build_flight_ticket_pdf(metadata):
             current_y -= 24
             p.line(x, current_y, x + total_width, current_y)
 
-        # header row
+        # Header row
         cx = x
         for i, w in enumerate(col_widths):
             p.rect(cx, current_y - row_height, w, row_height, stroke=1, fill=0)
             draw_cell_text(cx, current_y, headers[i], bold=True)
             cx += w
 
-        # body rows
+        # Body rows
         row_y = current_y - row_height
         for row in rows:
             cx = x
@@ -137,15 +150,22 @@ def build_flight_ticket_pdf(metadata):
                 value = row[i] if i < len(row) else ""
                 text = str(value or "")
 
-                # support multiline
+                # Support multiline text
                 lines = text.split("\n")
                 if len(lines) == 1:
-                    draw_cell_text(cx, row_y, text, size=9, bold=(i == len(row) - 1 and headers[-1] == "Mã vé"))
+                    draw_cell_text(
+                        cx,
+                        row_y,
+                        text,
+                        size=9,
+                        bold=(i == len(row) - 1 and headers[-1] == "Ticket No."),
+                    )
                 else:
                     yy = row_y - 10
                     for j, line in enumerate(lines[:3]):
                         p.setFont("Helvetica", 8)
                         p.drawString(cx + 4, yy - j * 10, line)
+
                 cx += w
             row_y -= row_height
 
@@ -165,7 +185,7 @@ def build_flight_ticket_pdf(metadata):
     paid_at = metadata.get("paid_at", "")
     item_name = metadata.get("item_name", f"Flight {flight_number}")
 
-    # parse flight_time if possible
+    # Parse flight time if possible
     depart_time = ""
     arrive_time = ""
     if flight_time and "-" in flight_time:
@@ -176,9 +196,8 @@ def build_flight_ticket_pdf(metadata):
     else:
         depart_time = flight_time
 
-    # fake ticket codes based on order_id for display
+    # Generate ticket code based on order ID
     ticket_code_1 = f"{str(order_id)[-8:]}" if order_id else "86890977"
-    ticket_code_2 = f"{str(order_id)[-7:]}9" if order_id else "86891009"
 
     route_text = f"{departure} - {arrival}" if departure and arrival else ""
     customer_dob = metadata.get("customer_dob", "")
@@ -187,14 +206,12 @@ def build_flight_ticket_pdf(metadata):
     passenger_rows = []
     passenger_count = int(passengers) if str(passengers).isdigit() else 1
 
-    gender_display = gender if gender else ""
-
     for i in range(1, passenger_count + 1):
         passenger_rows.append([
             str(i),
-            customer_name.upper() if customer_name else f"HANH KHACH {i}",
-            "Nguoi lon",
-            gender_display,
+            customer_name.upper() if customer_name else f"PASSENGER {i}",
+            "Adult",
+            gender,
             "",
             customer_dob,
         ])
@@ -206,53 +223,57 @@ def build_flight_ticket_pdf(metadata):
     p.setFillColor(colors.HexColor("#f28c28"))
     p.setFont("Helvetica-Bold", 18)
     p.drawString(18 * mm, top_y, "BestPrice")
+
     p.setFillColor(colors.HexColor("#2d72b8"))
     p.drawString(47 * mm, top_y, "Travel")
 
     p.setFillColor(colors.black)
     p.setFont("Helvetica", 9)
-    p.drawString(20 * mm, top_y - 6 * mm, "Ban dong hanh tin cay")
+    p.drawString(20 * mm, top_y - 6 * mm, "Your trusted travel companion")
 
     p.setFont("Helvetica-Bold", 12)
-    p.drawRightString(width - 18 * mm, top_y + 2 * mm, "BestPrice Travel., JSC")
+    p.drawRightString(width - 18 * mm, top_y + 2 * mm, "BestPrice Travel Co., Ltd")
 
     p.setFont("Helvetica-Bold", 9)
-    p.drawRightString(width - 18 * mm, top_y - 4 * mm, "VP Ha Noi: 12A, Ngo Ba Trieu, Pho Ba Trieu, Hai Ba Trung, HN")
-    p.drawRightString(width - 18 * mm, top_y - 10 * mm, "VP HCM: 95 Tran Quang Khai, Tan Dinh, Q1, Ho Chi Minh")
+    p.drawRightString(width - 18 * mm, top_y - 4 * mm, "Hanoi Office: 12A Ngo Ba Trieu, Hai Ba Trung, Hanoi")
+    p.drawRightString(width - 18 * mm, top_y - 10 * mm, "HCMC Office: 95 Tran Quang Khai, District 1, Ho Chi Minh City")
     p.drawRightString(width - 18 * mm, top_y - 16 * mm, "Website: www.bestprice.vn - Tel: 1900 6505")
+
     p.setFillColor(colors.red)
     p.drawRightString(width - 18 * mm, top_y - 22 * mm, f"Hotline: {customer_phone or '0936.259.428'}")
     p.setFillColor(colors.black)
 
     p.setFont("Helvetica-Bold", 15)
-    p.drawCentredString(width / 2, top_y - 36 * mm, "Ve may bay truc tuyen")
+    p.drawCentredString(width / 2, top_y - 36 * mm, "Electronic Flight Ticket")
 
     y = top_y - 44 * mm
 
-    # ===== Section 1: Order info =====
+    # ===== Section 1: Order Information =====
     order_rows = [
-        ["1", ticket_code_1, item_name, flight_number, "Xac nhan"],
+        ["1", ticket_code_1, item_name, flight_number, "Confirmed"],
     ]
     y = draw_table(
-        18 * mm, y,
+        18 * mm,
+        y,
         [10 * mm, 34 * mm, 42 * mm, 36 * mm, 34 * mm],
         12 * mm,
-        ["#", "Ma ve", "Hang bay", "Ma chuyen bay", "Tinh trang don hang"],
+        ["#", "Ticket No.", "Airline", "Flight No.", "Order Status"],
         order_rows,
-        title="Thong tin don hang"
+        title="Order Information",
     ) - 8 * mm
 
-    # ===== Section 2: Passenger info =====
+    # ===== Section 2: Passenger Information =====
     y = draw_table(
-        18 * mm, y,
+        18 * mm,
+        y,
         [10 * mm, 62 * mm, 24 * mm, 30 * mm, 28 * mm, 28 * mm],
         12 * mm,
-        ["#", "Ten day du", "Loai khach", "Gioi tinh", "Kiem tra hanh ly", "Ngay thang nam sinh"],
+        ["#", "Full Name", "Passenger Type", "Gender", "Checked Baggage", "Date of Birth"],
         passenger_rows,
-        title="Thong tin hanh khach"
+        title="Passenger Information",
     ) - 8 * mm
 
-    # ===== Section 3: Flight info =====
+    # ===== Section 3: Flight Information =====
     flight_rows = [[
         item_name,
         flight_number,
@@ -263,42 +284,45 @@ def build_flight_ticket_pdf(metadata):
         ticket_code_1,
     ]]
     y = draw_table(
-        18 * mm, y,
+        18 * mm,
+        y,
         [26 * mm, 24 * mm, 40 * mm, 26 * mm, 20 * mm, 20 * mm, 24 * mm],
         14 * mm,
-        ["Hang bay", "Ma chuyen bay", "Lo trinh bay", "Ngay khoi hanh", "Thoi gian khoi hanh", "Thoi gian den", "Ma ve"],
+        ["Airline", "Flight No.", "Route", "Departure Date", "Departure Time", "Arrival Time", "Ticket No."],
         flight_rows,
-        title="Thong tin chuyen bay"
+        title="Flight Information",
     ) - 8 * mm
 
-    # ===== Section 4: Fare rules =====
+    # ===== Section 4: Fare Rules =====
     fare_title_h = 10 * mm
     fare_body_h = 16 * mm
     box_x = 18 * mm
     box_w = width - 36 * mm
+
     p.rect(box_x, y - fare_title_h - fare_body_h, box_w, fare_title_h + fare_body_h, stroke=1, fill=0)
     p.line(box_x, y - fare_title_h, box_x + box_w, y - fare_title_h)
 
     p.setFont("Helvetica-Bold", 10)
-    p.drawString(box_x + 6, y - 14, "Quy tac gia")
+    p.drawString(box_x + 6, y - 14, "Fare Rules")
 
     p.setFont("Helvetica", 9)
-    p.drawString(box_x + 6, y - fare_title_h - 12, f"So chuyen bay {flight_number}:")
-    p.drawString(box_x + 62 * mm, y - fare_title_h - 12, "Duoc doi ngay bay. Phi nang hang tuy theo chinh sach hang.")
-    p.drawString(box_x + 62 * mm, y - fare_title_h - 22, "Ve da thanh toan thanh cong.")
-    y -= (fare_title_h + fare_body_h + 8 * mm)
+    p.drawString(box_x + 6, y - fare_title_h - 12, f"Flight No. {flight_number}:")
+    p.drawString(box_x + 62 * mm, y - fare_title_h - 12, "Flight date change is allowed according to airline policy.")
+    p.drawString(box_x + 62 * mm, y - fare_title_h - 22, "This ticket has been successfully paid.")
+
+    y -= fare_title_h + fare_body_h + 8 * mm
 
     # ===== Notes =====
     p.setFont("Helvetica-Bold", 10)
-    p.drawString(18 * mm, y - 4, "(*) Ghi chu quan trong")
-    p.setFont("Helvetica", 9)
+    p.drawString(18 * mm, y - 4, "(*) Important Notes")
 
+    p.setFont("Helvetica", 9)
     notes = [
-        "- Hanh khach vui long mang theo giay to tuy than hop le khi di may bay.",
-        "- Hanh khach co mat tai san bay truoc gio khoi hanh it nhat 90 phut.",
-        "- Vui long kiem tra email de nhan thong tin xac nhan va ve dien tu.",
-        f"- Email nhan ve: {customer_email}",
-        f"- Thoi gian thanh toan thanh cong: {paid_at}",
+        "- Please bring a valid ID or passport when traveling.",
+        "- Please arrive at the airport at least 90 minutes before departure.",
+        "- Please check your email for booking confirmation and e-ticket details.",
+        f"- Ticket email: {customer_email}",
+        f"- Payment time: {paid_at}",
     ]
 
     line_y = y - 16
@@ -308,20 +332,20 @@ def build_flight_ticket_pdf(metadata):
 
     # ===== Footer =====
     p.setFont("Helvetica-Bold", 10)
-    p.drawCentredString(width / 2, 24 * mm, "Cam on ban da dat dich vu tai BestPrice.")
-    p.drawCentredString(width / 2, 18 * mm, "CHUC BAN CO CHUYEN DI VUI VE!")
+    p.drawCentredString(width / 2, 24 * mm, "Thank you for booking with BestPrice.")
+    p.drawCentredString(width / 2, 18 * mm, "HAVE A NICE TRIP!")
 
     p.showPage()
     p.save()
+
     buffer.seek(0)
     return buffer.read()
 
-logger = logging.getLogger(__name__)
 
 def send_payment_success_email(metadata):
     customer_email = metadata.get("customer_email")
     if not customer_email:
-        logger.warning("Không tìm thấy email khách hàng!")
+        logger.warning("Customer email not found.")
         return
 
     booking_type = metadata.get("booking_type", "")
@@ -331,7 +355,8 @@ def send_payment_success_email(metadata):
     item_name = metadata.get("item_name", "")
     paid_at = metadata.get("paid_at", timezone.localtime().strftime("%d/%m/%Y %H:%M:%S"))
 
-    subject = "Xác nhận thanh toán thành công"
+    subject = "Payment Successful - Your E-Ticket"
+
     html_content = build_payment_email_html(
         booking_type=booking_type,
         item_name=item_name,
@@ -351,11 +376,27 @@ def send_payment_success_email(metadata):
         )
         email.content_subtype = "html"
 
-        # Gửi email
-        email.send(fail_silently=False)
+        # ===== Attach PDF =====
+        if metadata.get("booking_type") == "flight":
+            pdf_file = build_flight_ticket_pdf(metadata)
+
+            email.attach(
+                filename=f"ticket_{order_id}.pdf",
+                content=pdf_file,
+                mimetype="application/pdf",
+            )
+
+            print(">>> PDF ATTACHED")
+
+        # ===== Send Email =====
+        result = email.send(fail_silently=False)
+
+        print(">>> EMAIL SENT:", result)
+
         logger.info(f"Email sent to {customer_email} for order {order_id}")
 
     except Exception as e:
+        print("EMAIL SENDING ERROR:", str(e))
         logger.error(f"Error sending email to {customer_email} for order {order_id}: {str(e)}")
 
 
@@ -406,7 +447,7 @@ def create_checkout_session(request):
 
         return JsonResponse({
             "id": checkout_session.id,
-            "url": checkout_session.url
+            "url": checkout_session.url,
         })
 
     except Exception as e:
@@ -478,7 +519,7 @@ def create_flight_checkout_session(request):
 
         return JsonResponse({
             "id": checkout_session.id,
-            "url": checkout_session.url
+            "url": checkout_session.url,
         })
 
     except Exception as e:
@@ -543,7 +584,7 @@ def create_hotel_checkout_session(request):
                 }
             ],
             mode="payment",
-            success_url="http://localhost:3000/success",
+            success_url=f"http://localhost:3000/success?order_id={order_id}&type=hotel",
             cancel_url="http://localhost:3000/cancel",
             customer_email=customer_email if customer_email else None,
             metadata={
@@ -564,7 +605,7 @@ def create_hotel_checkout_session(request):
 
         return JsonResponse({
             "id": checkout_session.id,
-            "url": checkout_session.url
+            "url": checkout_session.url,
         })
 
     except Exception as e:
@@ -573,7 +614,7 @@ def create_hotel_checkout_session(request):
 
 @csrf_exempt
 def stripe_webhook(request):
-    print("=== DA VAO STRIPE WEBHOOK ===")
+    print("=== STRIPE WEBHOOK RECEIVED ===")
 
     payload = request.body
     sig_header = request.META.get("HTTP_STRIPE_SIGNATURE")
@@ -588,8 +629,9 @@ def stripe_webhook(request):
             )
         else:
             event = json.loads(payload)
+
     except Exception as e:
-        print("Webhook loi:", str(e))
+        print("WEBHOOK ERROR:", str(e))
         return HttpResponse(status=400)
 
     print("Event type:", event["type"])
@@ -597,9 +639,13 @@ def stripe_webhook(request):
     if event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
         metadata = session.get("metadata", {}) or {}
+
         metadata["paid_at"] = timezone.localtime().strftime("%d/%m/%Y %H:%M:%S")
+
         print("Metadata:", metadata)
+
         send_payment_success_email(metadata)
-        print("Da goi ham gui email")
+
+        print("Payment success email function called.")
 
     return HttpResponse(status=200)

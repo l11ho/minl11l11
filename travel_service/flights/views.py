@@ -11,8 +11,7 @@ from .serializers import FlightSerializer
 from rest_framework.decorators import api_view
 #from stripe import Checkout
 
-# Khóa API của Stripe (thay bằng khóa của bạn)
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+
 
 @api_view(['POST'])
 def create_flight_checkout_session(request):
@@ -83,5 +82,4 @@ class FlightList(APIView):
         flights = Flight.objects.all()
         serializer = FlightSerializer(flights, many=True)
         return Response(serializer.data)
-
 

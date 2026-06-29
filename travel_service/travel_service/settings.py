@@ -1,13 +1,8 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load .env
-load_dotenv()
-
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -64,25 +59,68 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'travel_service_db',
         'USER': 'postgres',
-        'PASSWORD': os.getenv("DB_PASSWORD"),
+        # 'PASSWORD': 'your_db_password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
 
-# Stripe
-STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
-STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
-STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
-# Email
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
+USE_I18N = True
+USE_TZ = True
 
-# OpenAI
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+STATIC_URL = 'static/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+
+
+
+
+
+
+
+log_dir = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'INFO',  # Chỉ ghi lại các thông báo ở cấp độ INFO hoặc cao hơn
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/payment.log',  # Đường dẫn tới file log
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],  # Log ra console và file
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
