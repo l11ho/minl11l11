@@ -1,0 +1,1180 @@
+.pf-page {
+  min-height: 100vh;
+  background: #f4f7fa;
+  color: #1f2937;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pf-header {
+  background: #ffffff;
+  border-bottom: 1px solid #dbe4ee;
+}
+
+.pf-header-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pf-logo {
+  color: #333;
+  font-size: 28px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pf-logo span {
+  color: #1593ff;
+  margin-left: 2px;
+}
+
+.pf-steps {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pf-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.pf-step span {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pf-step.done {
+  color: #059669;
+}
+
+.pf-step.done span {
+  background: #dcfce7;
+  color: #059669;
+}
+
+.pf-step.active {
+  color: #2563eb;
+}
+
+.pf-step.active span {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.pf-line {
+  width: 70px;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.pf-main {
+  max-width: 1180px;
+  margin: 28px auto;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 24px;
+  align-items: start;
+}
+
+.pf-left,
+.pf-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pf-card {
+  background: #ffffff;
+  border: 1px solid #dce5ef;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+.pf-card h2 {
+  margin: 0;
+  padding: 22px 22px 6px;
+  font-size: 24px;
+}
+
+.pf-desc {
+  margin: 0;
+  padding: 0 22px 18px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.pf-summary-box {
+  margin: 0 22px 20px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.pf-summary-box h3 {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.pf-summary-box p {
+  margin: 7px 0;
+  font-size: 14px;
+}
+
+.pf-flight-row {
+  border: 1px solid #dce5ef;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.pf-flight-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: #e8f4ff;
+  color: #007ce0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pf-flight-tag.return {
+  background: #eef7ff;
+  color: #0b6fd3;
+}
+
+.pf-flight-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pf-flight-content strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.pf-flight-content p {
+  margin: 0 0 4px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.pf-flight-content span {
+  color: #0f172a;
+  font-size: 13px;
+}
+
+.pf-ticket-type {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 7px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 14px;
+}
+
+.pf-form {
+  padding: 4px 22px 22px;
+}
+
+.pf-form h3 {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+
+.pf-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.pf-field {
+  margin-bottom: 18px;
+}
+
+.pf-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.pf-field input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.pf-field input:read-only {
+  background: #f8fafc;
+  color: #475569;
+}
+
+.pf-confirm-btn {
+  border: none;
+  border-radius: 999px;
+  background: #ff6b21;
+  color: #ffffff;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pf-confirm-btn:hover {
+  background: #f05f19;
+}
+
+.pf-payment-action {
+  margin: 0 22px 24px;
+  padding: 18px;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  background: #f0fdf4;
+}
+
+.pf-price-card {
+  padding: 18px;
+}
+
+.pf-price-card h3,
+.pf-side-summary h3 {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
+.pf-price-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.pf-price-line strong {
+  color: #0f172a;
+}
+
+.pf-total-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.pf-total-line strong {
+  color: #ff5e1f;
+  font-size: 24px;
+}
+
+.pf-side-summary {
+  padding: 18px;
+}
+
+.pf-side-summary p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.pf-side-summary strong {
+  color: #0f172a;
+}
+
+.pf-empty {
+  max-width: 420px;
+  margin: 100px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 1px 5px rgba(15, 23, 42, 0.1);
+}
+
+.pf-empty h2 {
+  margin: 0 0 8px;
+}
+
+.pf-empty p {
+  color: #64748b;
+}
+
+.pf-empty button {
+  border: none;
+  border-radius: 8px;
+  background: #1593ff;
+  color: #fff;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .pf-main {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  .pf-grid-2,
+  .pf-flight-content {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-steps {
+    flex-wrap: wrap;
+  }
+
+  .pf-line {
+    display: none;
+  }
+}
+
+.pf-payment-action button {
+  background: #0194f3 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 14px 28px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+}
+
+.pf-payment-action button:hover {
+  background: #007ce0 !important;
+}
+
+/* ===== TOUR PAYMENT PAGE ===== */
+
+.tour-payment-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  color: #06142f;
+  font-family: inherit;
+}
+
+.tour-payment-header {
+  height: 82px;
+  background: #ffffff;
+  border-bottom: 1px solid #dbe4ef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 72px;
+  box-sizing: border-box;
+}
+
+.tour-payment-logo {
+  font-size: 28px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.tour-payment-logo span {
+  color: #0ea5ff;
+  margin-left: 2px;
+}
+
+.tour-payment-steps {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #7b8494;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.tour-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour-step span {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #808080;
+  color: #ffffff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tour-step.active {
+  color: #0058d8;
+}
+
+.tour-step.active span {
+  background: #0058d8;
+}
+
+.tour-step-line {
+  width: 72px;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.tour-payment-container {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 42px 0 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 680px) 320px;
+  gap: 28px;
+  align-items: start;
+}
+
+.tour-payment-title {
+  margin-bottom: 20px;
+}
+
+.tour-payment-title h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.tour-payment-title p {
+  margin: 0;
+  color: #566174;
+  font-size: 14px;
+}
+
+.tour-form-card,
+.tour-summary-card,
+.tour-total-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+}
+
+.tour-form-card h2,
+.tour-summary-card h2 {
+  margin: 0 0 16px;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.tour-login-benefit {
+  background: #d9efff;
+  color: #0082e6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+
+.tour-login-benefit p {
+  margin: 0;
+}
+
+.tour-login-benefit strong {
+  text-decoration: underline;
+}
+
+.tour-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.tour-form-grid label {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.tour-form-grid label span {
+  color: #ef1d25;
+}
+
+.tour-form-grid input {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 999px;
+  background: #f5f5f5;
+  margin-top: 8px;
+  padding: 0 18px;
+  box-sizing: border-box;
+  outline: none;
+  color: #06142f;
+}
+
+.tour-passenger-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.tour-counter-item {
+  background: #f7f7f7;
+  border-radius: 999px;
+  min-height: 58px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tour-counter-item strong {
+  display: block;
+  font-size: 13px;
+}
+
+.tour-counter-item p {
+  margin: 3px 0 0;
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.tour-counter-control {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tour-counter-control button {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.tour-counter-control span {
+  font-weight: 900;
+}
+
+.tour-traveler-title {
+  color: #0058d8;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.tour-traveler-title span {
+  color: #7b8494;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+.tour-single-room-note {
+  color: #0058d8;
+  font-size: 13px;
+  margin: 0 0 14px;
+}
+
+.tour-traveler-row {
+  display: grid;
+  grid-template-columns: 30px 1fr 110px;
+  align-items: center;
+  gap: 12px;
+}
+
+.tour-traveler-input {
+  min-height: 48px;
+  border: 1px dashed #cbd5e1;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 0 18px;
+  text-align: left;
+  color: #7b8494;
+  cursor: pointer;
+}
+
+.tour-traveler-input strong {
+  float: right;
+  color: #ef1d25;
+}
+
+.tour-single-switch span {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.tour-single-switch input {
+  display: none;
+}
+
+.tour-single-switch i {
+  display: block;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  cursor: pointer;
+}
+
+.tour-single-switch i::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.2s;
+}
+
+.tour-single-switch input:checked + i {
+  background: #0ea5ff;
+}
+
+.tour-single-switch input:checked + i::before {
+  left: 20px;
+}
+
+.tour-coupon-row {
+  display: grid;
+  grid-template-columns: 1fr 96px;
+  gap: 10px;
+}
+
+.tour-coupon-row input {
+  height: 46px;
+  border: none;
+  border-radius: 999px;
+  background: #f5f5f5;
+  padding: 0 18px;
+  outline: none;
+}
+
+.tour-coupon-row button {
+  border: none;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #ffffff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.tour-coupon-row button:not(:disabled) {
+  background: #0ea5ff;
+}
+
+.tour-form-card textarea {
+  width: 100%;
+  min-height: 96px;
+  border: none;
+  border-radius: 16px;
+  background: #f5f5f5;
+  padding: 16px;
+  box-sizing: border-box;
+  outline: none;
+  resize: vertical;
+}
+
+.tour-form-card > p {
+  font-size: 13px;
+  margin-top: -6px;
+  color: #06142f;
+}
+
+.tour-payment-right {
+  position: sticky;
+  top: 24px;
+}
+
+.tour-summary-main {
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tour-summary-main img {
+  width: 66px;
+  height: 66px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.tour-summary-main h3 {
+  margin: 0 0 5px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.tour-summary-main p {
+  margin: 0 0 5px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.tour-summary-main span {
+  color: #0058d8;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tour-summary-collapse button {
+  width: 100%;
+  border: none;
+  background: #ffffff;
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  color: #0082e6;
+  font-weight: 800;
+  cursor: pointer;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tour-summary-collapse:last-child button {
+  border-bottom: none;
+}
+
+.tour-total-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.tour-total-line strong {
+  font-size: 18px;
+}
+
+.tour-total-line span {
+  color: #ef1d25;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.tour-policy-check {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  font-size: 12px;
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.tour-policy-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: #0ea5ff;
+}
+
+.tour-policy-check strong {
+  color: #0082e6;
+  text-decoration: underline;
+}
+
+.tour-submit-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 999px;
+  background: #f1f2f4;
+  color: #c0c4cc;
+  font-weight: 900;
+  cursor: not-allowed;
+}
+
+.tour-submit-btn.ready {
+  background: #ef1d25;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.tour-pay-button-wrap button {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 999px;
+  background: #ef1d25 !important;
+  color: #ffffff !important;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .tour-payment-header {
+    padding: 0 24px;
+  }
+
+  .tour-payment-container {
+    grid-template-columns: 1fr;
+  }
+
+  .tour-payment-right {
+    position: static;
+  }
+
+  .tour-form-grid,
+  .tour-passenger-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== TOUR SUMMARY COST DETAIL FIX ===== */
+
+.tour-summary-cost {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 14px;
+  padding-top: 4px;
+}
+
+.tour-summary-cost > button {
+  width: 100%;
+  border: none;
+  background: #ffffff;
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0082e6;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tour-summary-cost > button span {
+  color: #0082e6;
+  font-size: 16px;
+}
+
+.tour-cost-detail-list {
+  padding: 2px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tour-cost-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #374151;
+  font-size: 13px;
+}
+
+.tour-cost-detail-row span {
+  color: #374151;
+  font-weight: 500;
+}
+
+.tour-cost-detail-row strong {
+  color: #06142f;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Ẩn style cũ của thông tin chuyến xe nếu còn sót */
+.tour-summary-collapse {
+  display: none !important;
+}
+
+/* ===== TOUR TRAVELER MODAL ===== */
+
+.tour-traveler-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.tour-traveler-modal {
+  width: min(720px, 100%);
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+}
+
+.tour-traveler-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.tour-traveler-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.tour-traveler-modal-header button {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.tour-traveler-modal-note {
+  margin: 18px 22px 12px;
+  background: #eaf5ff;
+  color: #3b516b;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+
+.tour-traveler-modal-note strong {
+  color: #0058d8;
+}
+
+.tour-traveler-modal-body {
+  margin: 0 22px 22px;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.tour-traveler-modal-title {
+  color: #0058d8;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.tour-traveler-modal-title span {
+  color: #6b7280;
+}
+
+.tour-traveler-modal-form {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+}
+
+.tour-modal-index {
+  padding-top: 36px;
+  font-weight: 900;
+}
+
+.tour-modal-full {
+  grid-column: 2 / 3;
+}
+
+.tour-traveler-modal-form label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #06142f;
+}
+
+.tour-traveler-modal-form label span {
+  color: #ef1d25;
+}
+
+.tour-traveler-modal-form input,
+.tour-traveler-modal-form select {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: #ffffff;
+  margin-top: 8px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  outline: none;
+  color: #06142f;
+}
+
+.tour-traveler-modal-form small {
+  display: block;
+  color: #ef1d25;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.tour-modal-grid {
+  grid-column: 2 / 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.tour-birthday-inputs {
+  height: 42px;
+  background: #ffffff;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.tour-birthday-inputs input {
+  border: none;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: transparent;
+}
+
+.tour-birthday-inputs span {
+  color: #6b7280 !important;
+  padding: 0 6px;
+}
+
+.tour-calendar-icon {
+  margin-left: auto;
+}
+
+.tour-modal-phone-row {
+  grid-column: 2 / 3;
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 16px;
+  align-items: end;
+}
+
+.tour-modal-single-room span {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.tour-modal-single-room input {
+  display: none;
+}
+
+.tour-modal-single-room i {
+  display: block;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  cursor: pointer;
+}
+
+.tour-modal-single-room i::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.2s;
+}
+
+.tour-modal-single-room input:checked + i {
+  background: #0ea5ff;
+}
+
+.tour-modal-single-room input:checked + i::before {
+  left: 20px;
+}
+
+.tour-traveler-modal-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 20px 22px;
+  border-top: 1px solid #eef2f7;
+}
+
+.tour-modal-reset-btn,
+.tour-modal-confirm-btn {
+  height: 44px;
+  border-radius: 999px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.tour-modal-reset-btn {
+  border: 1px solid #9ca3af;
+  background: #ffffff;
+  color: #4b5563;
+}
+
+.tour-modal-confirm-btn {
+  border: none;
+  background: #0ea5ff;
+  color: #ffffff;
+}
+
+.tour-traveler-input.completed {
+  border-color: #0ea5ff;
+  color: #06142f;
+  font-weight: 800;
+}
+
+.tour-traveler-input.completed strong {
+  color: #0ea5ff;
+}
+
+@media (max-width: 700px) {
+  .tour-modal-grid,
+  .tour-modal-phone-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tour-traveler-modal-form {
+    grid-template-columns: 1fr;
+  }
+
+  .tour-modal-index,
+  .tour-modal-full,
+  .tour-modal-grid,
+  .tour-modal-phone-row {
+    grid-column: 1 / 2;
+  }
+}

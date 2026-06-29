@@ -1,0 +1,518 @@
+.travel-guide-page {
+  background: #fff;
+  min-height: 100vh;
+  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.tg-header {
+  height: 78px;
+  background: #fff;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 0 72px;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.tg-logo {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111827;
+  text-decoration: none;
+}
+
+.tg-logo span {
+  color: #1da1f2;
+  margin-left: 4px;
+}
+
+.tg-header-spacer {
+  min-width: 20px;
+}
+
+.tg-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.tg-actions span,
+.tg-actions a {
+  color: #374151;
+  text-decoration: none;
+}
+
+.tg-login {
+  background: #e0f2fe;
+  color: #0064c8 !important;
+  border-radius: 22px;
+  padding: 12px 18px;
+  font-weight: 700;
+}
+
+.tg-register {
+  background: #0ea5e9;
+  color: white !important;
+  border-radius: 22px;
+  padding: 12px 18px;
+  font-weight: 700;
+}
+
+.tg-user-badge {
+  background: #eef6ff;
+  color: #0057d9 !important;
+  border-radius: 22px;
+  padding: 11px 16px;
+  font-weight: 700;
+}
+
+.tg-logout-btn {
+  border: none;
+  background: #ff5a5f;
+  color: #fff;
+  border-radius: 22px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ================= HERO GALLERY ================= */
+
+.tg-hero-gallery {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  gap: 6px;
+  height: 350px;
+  background: #fff;
+}
+
+.tg-hero-main,
+.tg-hero-side,
+.tg-hero-bottom {
+  position: relative;
+  overflow: hidden;
+}
+
+.tg-hero-main img,
+.tg-hero-side > img,
+.tg-hero-bottom img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tg-hero-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 6px;
+}
+
+.tg-hero-bottom button {
+  position: absolute;
+  left: 28px;
+  bottom: 20px;
+  background: rgba(255, 255, 255, 0.22);
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.tg-container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.tg-intro {
+  margin-bottom: 52px;
+}
+
+.tg-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.tg-intro h1 {
+  font-size: 46px;
+  margin: 0 0 18px;
+  color: #111827;
+}
+
+.tg-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #111827;
+  font-size: 14px;
+}
+
+.tg-breadcrumb a {
+  color: #006ce4;
+  text-decoration: none;
+}
+
+.tg-breadcrumb strong {
+  color: #111827;
+}
+
+.tg-search-box {
+  width: 360px;
+  height: 52px;
+  border: 1px solid #d1d5db;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  color: #9ca3af;
+  background: #fff;
+}
+
+.tg-search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 15px;
+  color: #111827;
+}
+
+.tg-search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.tg-intro p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #111827;
+  margin: 0 0 18px;
+}
+
+.tg-see-less {
+  border: none;
+  background: transparent;
+  color: #0077e6;
+  font-weight: 800;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.tg-section {
+  margin-bottom: 56px;
+}
+
+.tg-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 34px;
+}
+
+.tg-section-heading h2 {
+  margin: 0 0 6px;
+  color: #009966;
+  font-size: 28px;
+}
+
+.tg-section-heading p {
+  margin: 0;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.tg-section-icon {
+  width: 52px;
+  height: 52px;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.tg-section h3 {
+  font-size: 27px;
+  margin: 0 0 24px;
+  color: #374151;
+}
+
+/* ================= CARDS ================= */
+
+.tg-card-grid {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 56px;
+}
+
+.tg-card-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tg-card-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.tg-place-card,
+.tg-destination-card,
+.tg-article-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+}
+
+.tg-place-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+.tg-place-card div {
+  padding: 16px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.tg-destination-card {
+  position: relative;
+  height: 210px;
+}
+
+.tg-destination-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.78);
+}
+
+.tg-destination-card strong {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+.tg-article-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+.tg-article-card div {
+  padding: 14px 16px;
+}
+
+.tg-article-card h4 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  line-height: 1.35;
+  color: #111827;
+}
+
+.tg-article-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ================= TIPS SECTION ================= */
+
+.tg-tips-section {
+  background: #17262d;
+  color: white;
+  padding: 42px 0 70px;
+}
+
+.tg-tips-inner {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tg-section-heading.dark {
+  color: white;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+
+.tg-section-heading.dark h2 {
+  color: white;
+}
+
+.tg-section-heading.dark p {
+  color: white;
+}
+
+.tg-section-icon.blue {
+  background: #168cff;
+}
+
+.tg-tips-content {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 60px;
+  margin-top: 24px;
+}
+
+.tg-tip-tabs h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: white;
+}
+
+.tg-tip-tabs p {
+  margin: 0 0 24px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.4;
+}
+
+.tg-tip-tabs button {
+  display: block;
+  width: 160px;
+  min-height: 48px;
+  border: none;
+  background: transparent;
+  color: white;
+  text-align: left;
+  padding: 12px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.tg-tip-tabs button.active {
+  background: white;
+  color: #0077e6;
+}
+
+.tg-tip-panel {
+  background: white;
+  color: #111827;
+  border-radius: 8px;
+  padding: 20px;
+  align-self: center;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+  .tg-header {
+    padding: 0 32px;
+  }
+
+  .tg-actions {
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .tg-card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .tg-header {
+    height: auto;
+    grid-template-columns: 1fr;
+    padding: 18px 24px;
+  }
+
+  .tg-actions {
+    flex-wrap: wrap;
+  }
+
+  .tg-hero-gallery {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .tg-hero-main {
+    height: 260px;
+  }
+
+  .tg-hero-side {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
+    height: 180px;
+  }
+
+  .tg-title-row {
+    flex-direction: column;
+  }
+
+  .tg-search-box {
+    width: 100%;
+  }
+
+  .tg-card-grid-3,
+  .tg-card-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .tg-tips-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .tg-tip-tabs button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .tg-container {
+    padding: 24px 16px;
+  }
+
+  .tg-intro h1 {
+    font-size: 36px;
+  }
+
+  .tg-section h3 {
+    font-size: 22px;
+  }
+
+  .tg-section-heading h2 {
+    font-size: 24px;
+  }
+
+  .tg-hero-side {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .tg-hero-side > img,
+  .tg-hero-bottom {
+    height: 180px;
+  }
+}
